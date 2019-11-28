@@ -1,15 +1,33 @@
 import XCTest
 @testable import OpaqueReturnStuff
 
-final class OpaqueReturnStuffTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(OpaqueReturnStuff().text, "Hello, World!")
-    }
 
-    static var allTests = [
-        ("testExample", testExample),
-    ]
+@available(OSX 10.15.0, *)
+final class OpaqueReturnStuffTests: XCTestCase {
+
+    func testCanDoShapes() {
+        var sut = OpaqueReturnStuff()
+        let trapezoid = sut.makeTrapezoid()
+        print(trapezoid.draw())
+    }
+    
+    func testCanReturnOpaqueType() {
+        var sut = OpaqueReturnStuff()
+        let smallTriangle = sut.Triangle(size: 3)
+        let opaqueJoinedTriangles = join(smallTriangle, flip(smallTriangle))
+        print(opaqueJoinedTriangles.draw())
+    }
+    
+//    func testInvalidFlipFails() {
+//        let smallTriangle = Triangle(size: 3)
+//        let flippedTriangle = invalidFlip(smallTriangle)
+//        print(flippedTriangle.draw())
+//    }
+    
+    func testCanSetOpaqueProperty() {
+        var sut = OpaqueReturnStuff()
+        let smallTriangle = sut.Triangle(size: 3)
+        let opaqueShape = flip(smallTriangle)
+        print(opaqueShape)
+    }
 }
